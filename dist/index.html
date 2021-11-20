@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+
+    <style>
+      /* Mengatasi horzontal scroll */
+      body {
+        overflow-x: hidden;
+      }
+    </style>
+  </head>
+  <!-- Hide body until script loaded -->
+  <body style="display: none">
+    <!-- banner -->
+    <div
+      style="
+        width: 100vw;
+        height: 40vh;
+        max-height: 300px;
+        background-image: url(https://wallpaperaccess.com/full/3076836.jpg);
+        background-size: cover;
+      "
+    >
+      <div
+        style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); position: relative"
+      >
+        <center>
+          <div
+            style="
+              width: 300px;
+              height: 60%;
+              margin: 0;
+              position: absolute;
+              top: 60%;
+              left: 50%;
+              -ms-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+            "
+          >
+            <h1 class="text-light">Username</h1>
+            <p style="color: rgb(200, 200, 200)">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, quibusdam?
+            </p>
+          </div>
+        </center>
+      </div>
+    </div>
+    <!-- /banner -->
+
+    <!-- articles -->
+    <div class="container">
+      <div class="container mt-3">
+        <h1>Articles</h1>
+        <hr />
+        <div
+          id="articles-container"
+          class="row"
+          style="overflow-y: auto; height: 80vh; max-height: 500px"
+        ></div>
+      </div>
+    </div>
+    <!-- /articles -->
+
+    <script src="/script.js"></script>
+  </body>
+</html>

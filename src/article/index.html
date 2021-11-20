@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Article</title>
+
+    <style>
+      /* Membatasi agar ukuran semua image di article(Markdown) tidak melebihi container */
+      #article-container img {
+        max-width: 100%;
+      }
+
+      /* Mengatasi horzontal scroll saat layar kecil dan ngefix other-articles-container*/
+      @media only screen and (max-width: 750px) {
+        /* Mobile */
+        html,
+        body {
+          overflow-x: hidden;
+        }
+      }
+
+      @media only screen and (min-width: 751px) {
+        /* Desktop */
+        body {
+          overflow-x: hidden;
+        }
+      }
+    </style>
+  </head>
+  <!-- Hide body until script loaded -->
+  <body style="display: none">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-md-8 bg-light">
+          <article id="article-container" class="blog-post pt-2"></article>
+        </div>
+
+        <div class="col-md-4">
+          <div class="position-sticky" style="top: 60px">
+            <div class="bg-light rounded pt-2">
+              <h3><i>Other Articles</i></h3>
+              <div
+                id="other-articles-container"
+                class="border"
+                style="overflow: auto; height: 75vh"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/article/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "daffa-ilhami"
+  },
+  "targets": {
+    "daffa-ilhami": {
+      "hosting": {
+        "blog-mdaffailhami": [
+          "blog-mdaffailhami"
+        ]
+      }
+    }
+  }
+}

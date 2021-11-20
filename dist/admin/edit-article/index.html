@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Article</title>
+
+    <style>
+      /* Membatasi agar ukuran semua image di form(Markdown) tidak melebihi container */
+      form img {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <!-- Hide body until script loaded -->
+  <body style="display: none">
+    <div class="container mt-3">
+      <form id="add-article-form" method="get">
+        <div class="input-group">
+          <span class="input-group-text">Title</span>
+          <input
+            id="title-input"
+            type="text"
+            class="form-control"
+            placeholder="Title"
+            aria-label="Title"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <span class="input-group-text">Image</span>
+          <input
+            id="image-input"
+            type="text"
+            class="form-control"
+            placeholder="URL"
+            aria-label="URL"
+          />
+        </div>
+        <div class="input-group">
+          <span class="input-group-text">Description</span>
+          <textarea
+            id="description-input"
+            class="form-control"
+            aria-label="With textarea"
+            aria-label="Description"
+            placeholder="Description"
+          ></textarea>
+        </div>
+        <textarea
+          id="body-input"
+          class="form-control"
+          aria-label="Body"
+          placeholder="Body"
+        ></textarea>
+        <center>
+          <button id="submit-button" type="submit" class="btn btn-primary" style="width: 100%">
+            Submit
+          </button>
+        </center>
+      </form>
+    </div>
+
+    <script src="/admin/edit-article/script.js"></script>
+  </body>
+</html>
