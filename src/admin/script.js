@@ -105,7 +105,10 @@ onAuthStateChanged(auth, (user) => {
               // delete article in articles container
               articlesContainer.removeChild(grid);
             })
-            .catch((error) => console.error(error));
+            .catch((error) => {
+              console.error(error);
+              window.alert("Failed to delete article!");
+            });
         });
       });
 
