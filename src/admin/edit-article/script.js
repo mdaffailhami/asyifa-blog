@@ -1,8 +1,8 @@
 import { doc, getDoc, updateDoc } from "@firebase/firestore";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
-import "simplemde/dist/simplemde.min.css";
-import SimpleMDE from "simplemde/dist/simplemde.min.js";
+import EasyMDE from "easymde";
+import "easymde/dist/easymde.min.css";
 import { navbar, footer } from "../../../elements";
 import { firestore } from "../../../modules/firebase";
 
@@ -16,13 +16,16 @@ document.body.insertAdjacentElement("beforeend", footer());
 const titleInput = document.getElementById("title-input");
 const imageInput = document.getElementById("image-input");
 const descriptionInput = document.getElementById("description-input");
-const bodySimpleMde = new SimpleMDE({ element: document.getElementById("body-input") });
+const bodyInput = new EasyMDE({
+  element: document.getElementById("body-input"),
+  placeholder: "Body",
+  showIcons: ["bold", "italic", "strikethrough", "heading", "redo", "undo", "horizontal-rule"],
+});
 const addArticleForm = document.getElementById("add-article-form");
 
 const docId = getQueryVariable("id");
 
 // add default value to form
-bodySimpleMde.value("aowkwkw");
 getDoc(doc(firestore, "articles", docId))
   .then((article) => {
     article = article.data();
@@ -35,7 +38,7 @@ getDoc(doc(firestore, "articles", docId))
     document.body.style.display = "block";
 
     // set article body value after showing html body because there's a bug
-    bodySimpleMde.value(article.body);
+    bodyInput.value(article.body);
   })
   .catch((error) => {
     console.error(error);
@@ -49,7 +52,7 @@ getDoc(doc(firestore, "articles", docId))
 addArticleForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   // Validasi
-  if (bodySimpleMde.value().length == 0) {
+  if (bodyInput.value().length == 0) {
     alert("Please fill out body field!");
     return;
   }
@@ -62,7 +65,7 @@ addArticleForm.addEventListener("submit", async (e) => {
       title: titleInput.value,
       image: imageInput.value,
       description: descriptionInput.value,
-      body: bodySimpleMde.value(),
+      body: bodyInput.value(),
     });
 
     alert("Article successfully edited!");
