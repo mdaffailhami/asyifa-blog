@@ -8,7 +8,7 @@ export default function (isAdmin = false) {
         }
       </style>
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><strong>Navbar</strong></a>
+        <a class="navbar-brand" href="/"><strong>Navbar</strong></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -22,12 +22,12 @@ export default function (isAdmin = false) {
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
             ${(() => {
               if (isAdmin) {
                 return `
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/admin/storage/">Storage</a>
+                  </li>
                   <li id="sign-out-button" class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Sign out</a>
                   </li>
