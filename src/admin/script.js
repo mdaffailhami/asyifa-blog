@@ -35,15 +35,15 @@ onAuthStateChanged(auth, (user) => {
   const articlesContainerLoader = loader();
   articlesContainer.insertAdjacentElement("beforeend", articlesContainerLoader);
 
-  // Sign out button event
-  const signOutButton = document.getElementById("sign-out-button");
-  signOutButton.addEventListener("click", (e) => {
-    e.preventDefault();
+  // // Sign out button event
+  // const signOutButton = document.getElementById("sign-out-button");
+  // signOutButton.addEventListener("click", (e) => {
+  //   e.preventDefault();
 
-    const confirmation = window.confirm("Are you sure you want to sign out?");
+  //   const confirmation = window.confirm("Are you sure you want to sign out?");
 
-    if (confirmation) signOut(auth);
-  });
+  //   if (confirmation) signOut(auth);
+  // });
 
   // latest article
   let latestArticle = null;

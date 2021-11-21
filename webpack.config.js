@@ -7,6 +7,7 @@ const config = {
     "script.js": resolve(__dirname, "src/script.js"),
     "article/script.js": resolve(__dirname, "src/article/script.js"),
     "signin/script.js": resolve(__dirname, "src/signin/script.js"),
+    "signout/script.js": resolve(__dirname, "src/signout/script.js"),
     "admin/script.js": resolve(__dirname, "src/admin/script.js"),
     "admin/add-article/script.js": resolve(__dirname, "src/admin/add-article/script.js"),
     "admin/edit-article/script.js": resolve(__dirname, "src/admin/edit-article/script.js"),
@@ -32,6 +33,11 @@ const config = {
       template: resolve(__dirname, "src/signin/index.html"),
       chunks: [],
       filename: "signin/index.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: resolve(__dirname, "src/signout/index.html"),
+      chunks: [],
+      filename: "signout/index.html",
     }),
     new HtmlWebpackPlugin({
       template: resolve(__dirname, "src/admin/index.html"),

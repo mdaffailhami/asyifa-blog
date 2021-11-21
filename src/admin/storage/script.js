@@ -172,8 +172,9 @@ onAuthStateChanged(auth, async (user) => {
         uploadProgess.value = progress;
       },
       (error) => {
-        console.log(error);
+        console.error(error);
         window.alert("Upload file failed!");
+        uploadProgess.style.display = "none";
       },
       () => {
         window.alert("File uploaded!");

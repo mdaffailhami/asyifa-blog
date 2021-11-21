@@ -29,7 +29,7 @@ export default function (isAdmin = false) {
                     <a class="nav-link active" aria-current="page" href="/admin/storage/">Storage</a>
                   </li>
                   <li id="sign-out-button" class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Sign out</a>
+                    <a class="nav-link active" aria-current="page" href="/signout/">Sign out</a>
                   </li>
                 `;
               } else {
