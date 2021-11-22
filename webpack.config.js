@@ -12,6 +12,7 @@ const config = {
     "admin/add-article/script.js": resolve(__dirname, "src/admin/add-article/script.js"),
     "admin/edit-article/script.js": resolve(__dirname, "src/admin/edit-article/script.js"),
     "admin/storage/script.js": resolve(__dirname, "src/admin/storage/script.js"),
+    "admin/settings/script.js": resolve(__dirname, "src/admin/settings/script.js"),
   },
   output: {
     publicPath: "/",
@@ -58,6 +59,11 @@ const config = {
       template: resolve(__dirname, "src/admin/storage/index.html"),
       chunks: [],
       filename: "admin/storage/index.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: resolve(__dirname, "src/admin/settings/index.html"),
+      chunks: [],
+      filename: "admin/settings/index.html",
     }),
   ],
   module: {

@@ -147,7 +147,7 @@ onAuthStateChanged(auth, async (user) => {
   } catch (error) {
     console.error(error);
     // Error alert
-    filesContainer.insertAdjacentElement("afterbegin", alert("danger", "Failed to fetch data!"));
+    filesContainer.insertAdjacentElement("afterbegin", alert("danger", "Failed to get files!"));
   } finally {
     // Remove loader
     filesContainer.removeChild(filesContainerLoader);

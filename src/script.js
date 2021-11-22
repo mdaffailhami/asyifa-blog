@@ -1,7 +1,16 @@
-import { collection, getDocs, limit, orderBy, query, startAfter } from "@firebase/firestore";
+import {
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  startAfter,
+  getDoc,
+  doc,
+} from "@firebase/firestore";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
-import { footer, navbar, articleCard, alert, loader } from "../elements";
+import { footer, navbar, articleCard, alert, loader, banner } from "../elements";
 import { firestore } from "../modules/firebase";
 
 // Show HTML Body
@@ -10,6 +19,19 @@ document.body.style.display = "block";
 // add navbar & footer
 document.body.insertAdjacentElement("afterbegin", navbar());
 document.body.insertAdjacentElement("beforeend", footer());
+
+// add banner
+getDoc(doc(firestore, "settings", "banner"))
+  .then((bannerDoc) => {
+    const bannerData = bannerDoc.data();
+    document
+      .getElementById("banner-container")
+      .insertAdjacentElement(
+        "afterbegin",
+        banner(bannerData.title, bannerData.image, bannerData.description)
+      );
+  })
+  .catch((error) => console.error(error));
 
 // elements
 const articlesContainer = document.getElementById("articles-container");

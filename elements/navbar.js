@@ -1,5 +1,6 @@
 export default function (isAdmin = false) {
   const element = document.createElement("div");
+
   element.innerHTML = `
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-secondary">
       <style>
@@ -8,7 +9,7 @@ export default function (isAdmin = false) {
         }
       </style>
       <div class="container-fluid">
-        <a class="navbar-brand" href="/"><strong>Navbar</strong></a>
+        <a class="navbar-brand" href="/"><strong>Home</strong></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -26,10 +27,16 @@ export default function (isAdmin = false) {
               if (isAdmin) {
                 return `
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/admin/storage/">Storage</a>
+                    <a class="nav-link" aria-current="page" href="/admin/">Admin</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/admin/storage/">Storage</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/admin/settings/">Settings</a>
                   </li>
                   <li id="sign-out-button" class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/signout/">Sign out</a>
+                    <a class="nav-link" aria-current="page" href="/signout/">Sign out</a>
                   </li>
                 `;
               } else {

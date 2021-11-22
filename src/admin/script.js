@@ -9,10 +9,11 @@ import {
   orderBy,
   query,
   startAfter,
+  getDoc,
 } from "@firebase/firestore";
-import { onAuthStateChanged, signOut } from "@firebase/auth";
+import { onAuthStateChanged } from "@firebase/auth";
 import { auth, firestore } from "../../modules/firebase";
-import { footer, navbar, articleCard, alert, loader } from "../../elements";
+import { footer, navbar, articleCard, alert, loader, banner } from "../../elements";
 
 // Check user
 onAuthStateChanged(auth, (user) => {
@@ -27,6 +28,19 @@ onAuthStateChanged(auth, (user) => {
   // add navbar & footer
   document.body.insertAdjacentElement("afterbegin", navbar(true));
   document.body.insertAdjacentElement("beforeend", footer());
+
+  // add banner
+  getDoc(doc(firestore, "settings", "banner"))
+    .then((bannerDoc) => {
+      const bannerData = bannerDoc.data();
+      document
+        .getElementById("banner-container")
+        .insertAdjacentElement(
+          "afterbegin",
+          banner(bannerData.title, bannerData.image, bannerData.description)
+        );
+    })
+    .catch((error) => console.error(error));
 
   // elements
   const articlesContainer = document.getElementById("articles-container");
