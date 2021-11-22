@@ -54,7 +54,7 @@ onAuthStateChanged(auth, (user) => {
         // Set settings to html element
         bannerSetting.title.value = bannerDoc.title;
         bannerSetting.image.value = bannerDoc.image;
-        bannerSetting.description.value = bannerDoc.description;
+        bannerSetting.description.innerHTML = bannerDoc.description;
       }
     } catch (error) {
       console.error(error);

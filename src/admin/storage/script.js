@@ -29,7 +29,7 @@ onAuthStateChanged(auth, async (user) => {
 
   try {
     // Get files
-    const files = await list(ref(storage), { maxResults: 50 });
+    const files = await list(ref(storage), { maxResults: 10 });
 
     let index = 1;
     files.items.forEach(async (file) => {

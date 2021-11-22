@@ -1,6 +1,12 @@
 export default function (title, image, description) {
   const element = document.createElement("div");
 
+  // convert string to html (\n to <br />)
+  function nl2br(str) {
+    return (str + "").replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, "$1" + "<br />" + "$2");
+  }
+  description = nl2br(description);
+
   element.innerHTML = `
     <div
       style="
@@ -17,6 +23,7 @@ export default function (title, image, description) {
       >
         <center>
           <div
+            id="banner-content"
             style="
               width: 300px;
               height: 60%;
@@ -29,7 +36,7 @@ export default function (title, image, description) {
             "
           >
             <h1 class="text-light">${title}</h1>
-            <p style="color: rgb(200, 200, 200)">${description}</p>
+            <p id="banner-description" style="color: rgb(200, 200, 200)">${description}</p>
           </div>
         </center>
       </div>
