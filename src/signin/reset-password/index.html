@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Signin</title>
+    <title>Reset Password</title>
 
     <style>
       .bd-placeholder-img {
@@ -63,8 +63,8 @@
   <!-- Hide body until script loaded -->
   <body style="display: none">
     <main class="form-signin">
-      <form id="login-form" method="post">
-        <h1 class="h3 mb-3 fw-normal">Please Sign in</h1>
+      <form id="reset-password-form" method="post">
+        <h1 class="h3 mb-3 fw-normal">Enter your email to reset your password!</h1>
 
         <div class="form-floating">
           <input
@@ -76,22 +76,14 @@
           />
           <label for="email-input">Email address</label>
         </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="password-input"
-            placeholder="Password"
-            required
-          />
-          <label for="password-input">Password</label>
-        </div>
+        <div id="alert-container"></div>
+
         <button id="submit-button" class="w-100 btn btn-lg btn-primary" type="submit">
-          Sign In
+          Send Verification
         </button>
       </form>
     </main>
 
-    <script src="/signin/script.js"></script>
+    <script src="/signin/reset-password/script.js"></script>
   </body>
 </html>

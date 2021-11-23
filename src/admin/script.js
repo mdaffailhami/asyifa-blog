@@ -104,6 +104,7 @@ onAuthStateChanged(auth, (user) => {
       if (clearArticles) {
         articlesContainer.innerHTML = "";
         articlesContainer.insertAdjacentElement("beforeend", articlesContainerLoader);
+        return;
       }
 
       if (articles.empty) {
@@ -161,6 +162,7 @@ onAuthStateChanged(auth, (user) => {
 
     // Jika tidak ada yg di-search
     if (searchKeywords.length == 1 && searchKeywords[0] == "") {
+      articlesContainer.addEventListener("scroll", onArticlesContainerScrolledToBottom);
       articlesContainer.innerHTML = "";
       articlesFirstLoad();
       return;

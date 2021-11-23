@@ -95,6 +95,7 @@ async function getArticles(query, clearArticles = false) {
     if (clearArticles) {
       articlesContainer.innerHTML = "";
       articlesContainer.insertAdjacentElement("beforeend", articlesContainerLoader);
+      return;
     }
 
     if (articles.empty) {
@@ -133,6 +134,7 @@ function searchArticles() {
 
   // Jika tidak ada yg di-search
   if (searchKeywords.length == 1 && searchKeywords[0] == "") {
+    articlesContainer.addEventListener("scroll", onArticlesContainerScrolledToBottom);
     articlesContainer.innerHTML = "";
     articlesFirstLoad();
     return;

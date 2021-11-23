@@ -2,11 +2,13 @@ const { resolve } = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const config = {
-  mode: "production",
+  // mode: "production",
+  mode: "development",
   entry: {
     "script.js": resolve(__dirname, "src/script.js"),
     "article/script.js": resolve(__dirname, "src/article/script.js"),
     "signin/script.js": resolve(__dirname, "src/signin/script.js"),
+    "signin/reset-password/script.js": resolve(__dirname, "src/signin/reset-password/script.js"),
     "signout/script.js": resolve(__dirname, "src/signout/script.js"),
     "admin/script.js": resolve(__dirname, "src/admin/script.js"),
     "admin/add-article/script.js": resolve(__dirname, "src/admin/add-article/script.js"),
@@ -34,6 +36,11 @@ const config = {
       template: resolve(__dirname, "src/signin/index.html"),
       chunks: [],
       filename: "signin/index.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: resolve(__dirname, "src/signin/reset-password/index.html"),
+      chunks: [],
+      filename: "signin/reset-password/index.html",
     }),
     new HtmlWebpackPlugin({
       template: resolve(__dirname, "src/signout/index.html"),
