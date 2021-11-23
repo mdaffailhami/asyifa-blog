@@ -10,6 +10,7 @@ import {
   query,
   startAfter,
   getDoc,
+  where,
 } from "@firebase/firestore";
 import { onAuthStateChanged } from "@firebase/auth";
 import { auth, firestore } from "../../modules/firebase";
@@ -44,20 +45,15 @@ onAuthStateChanged(auth, (user) => {
 
   // elements
   const articlesContainer = document.getElementById("articles-container");
+  const searchForm = document.getElementById("search-form");
+  const searchInput = document.querySelector("#search-form input");
 
   // add loader
   const articlesContainerLoader = loader();
   articlesContainer.insertAdjacentElement("beforeend", articlesContainerLoader);
 
-  // // Sign out button event
-  // const signOutButton = document.getElementById("sign-out-button");
-  // signOutButton.addEventListener("click", (e) => {
-  //   e.preventDefault();
-
-  //   const confirmation = window.confirm("Are you sure you want to sign out?");
-
-  //   if (confirmation) signOut(auth);
-  // });
+  // articles limit
+  const articlesLimit = 10;
 
   // latest article
   let latestArticle = null;
@@ -65,11 +61,23 @@ onAuthStateChanged(auth, (user) => {
   // loading articles condition
   let isLoadingArticles = false;
 
-  // load first articles
-  getArticles(query(collection(firestore, "articles"), orderBy("id", "desc"), limit(10)));
+  // articles first load
+  articlesFirstLoad();
 
   // load more articles
   articlesContainer.addEventListener("scroll", onArticlesContainerScrolledToBottom);
+
+  // Search articles event
+  searchForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    searchArticles();
+  });
+
+  function articlesFirstLoad() {
+    getArticles(
+      query(collection(firestore, "articles"), orderBy("id", "desc"), limit(articlesLimit))
+    );
+  }
 
   function onArticlesContainerScrolledToBottom() {
     const triggerHeight = articlesContainer.scrollTop + articlesContainer.offsetHeight;
@@ -79,19 +87,24 @@ onAuthStateChanged(auth, (user) => {
           collection(firestore, "articles"),
           orderBy("id", "desc"),
           startAfter(latestArticle),
-          limit(10)
+          limit(articlesLimit)
         )
       );
     }
   }
 
-  async function getArticles(query) {
+  async function getArticles(query, clearArticles = false) {
     if (isLoadingArticles) return;
     isLoadingArticles = true;
     articlesContainer.insertAdjacentElement("beforeend", articlesContainerLoader);
 
     try {
       const articles = await getDocs(query);
+
+      if (clearArticles) {
+        articlesContainer.innerHTML = "";
+        articlesContainer.insertAdjacentElement("beforeend", articlesContainerLoader);
+      }
 
       if (articles.empty) {
         articlesContainer.removeEventListener("scroll", onArticlesContainerScrolledToBottom);
@@ -103,6 +116,7 @@ onAuthStateChanged(auth, (user) => {
         const grid = document.createElement("div");
         grid.classList.add("col-md-6");
         grid.classList.add("mb-2");
+
         grid.insertAdjacentElement("beforeend", articleCard(article, true));
         articlesContainer.insertAdjacentElement("beforeend", grid);
 
@@ -140,5 +154,24 @@ onAuthStateChanged(auth, (user) => {
       articlesContainer.removeChild(articlesContainerLoader);
       isLoadingArticles = false;
     }
+  }
+
+  function searchArticles() {
+    const searchKeywords = searchInput.value.toLowerCase().split(" ");
+
+    // Jika tidak ada yg di-search
+    if (searchKeywords.length == 1 && searchKeywords[0] == "") {
+      articlesContainer.innerHTML = "";
+      articlesFirstLoad();
+      return;
+    }
+
+    getArticles(
+      query(
+        collection(firestore, "articles"),
+        where("keywords", "array-contains-any", searchKeywords)
+      ),
+      true
+    );
   }
 });

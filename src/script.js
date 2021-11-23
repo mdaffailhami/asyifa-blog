@@ -7,6 +7,7 @@ import {
   startAfter,
   getDoc,
   doc,
+  where,
 } from "@firebase/firestore";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
@@ -35,10 +36,15 @@ getDoc(doc(firestore, "settings", "banner"))
 
 // elements
 const articlesContainer = document.getElementById("articles-container");
+const searchForm = document.getElementById("search-form");
+const searchInput = document.querySelector("#search-form input");
 
 // add loader
 const articlesContainerLoader = loader();
 articlesContainer.insertAdjacentElement("beforeend", articlesContainerLoader);
+
+// articles limit
+const articlesLimit = 10;
 
 // latest article
 let latestArticle = null;
@@ -46,11 +52,23 @@ let latestArticle = null;
 // loading articles condition
 let isLoadingArticles = false;
 
-// load first articles
-getArticles(query(collection(firestore, "articles"), orderBy("id", "desc"), limit(10)));
+// articles first load
+articlesFirstLoad();
 
-// load more articles
+// load more articles event
 articlesContainer.addEventListener("scroll", onArticlesContainerScrolledToBottom);
+
+// Search articles event
+searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  searchArticles();
+});
+
+function articlesFirstLoad() {
+  getArticles(
+    query(collection(firestore, "articles"), orderBy("id", "desc"), limit(articlesLimit))
+  );
+}
 
 function onArticlesContainerScrolledToBottom() {
   const triggerHeight = articlesContainer.scrollTop + articlesContainer.offsetHeight;
@@ -60,19 +78,24 @@ function onArticlesContainerScrolledToBottom() {
         collection(firestore, "articles"),
         orderBy("id", "desc"),
         startAfter(latestArticle),
-        limit(10)
+        limit(articlesLimit)
       )
     );
   }
 }
 
-async function getArticles(query) {
+async function getArticles(query, clearArticles = false) {
   if (isLoadingArticles) return;
   isLoadingArticles = true;
   articlesContainer.insertAdjacentElement("beforeend", articlesContainerLoader);
 
   try {
     const articles = await getDocs(query);
+
+    if (clearArticles) {
+      articlesContainer.innerHTML = "";
+      articlesContainer.insertAdjacentElement("beforeend", articlesContainerLoader);
+    }
 
     if (articles.empty) {
       articlesContainer.removeEventListener("scroll", onArticlesContainerScrolledToBottom);
@@ -84,6 +107,7 @@ async function getArticles(query) {
       const grid = document.createElement("div");
       grid.classList.add("col-md-6");
       grid.classList.add("mb-2");
+
       grid.insertAdjacentElement("beforeend", articleCard(article));
       articlesContainer.insertAdjacentElement("beforeend", grid);
     });
@@ -102,4 +126,23 @@ async function getArticles(query) {
     articlesContainer.removeChild(articlesContainerLoader);
     isLoadingArticles = false;
   }
+}
+
+function searchArticles() {
+  const searchKeywords = searchInput.value.toLowerCase().split(" ");
+
+  // Jika tidak ada yg di-search
+  if (searchKeywords.length == 1 && searchKeywords[0] == "") {
+    articlesContainer.innerHTML = "";
+    articlesFirstLoad();
+    return;
+  }
+
+  getArticles(
+    query(
+      collection(firestore, "articles"),
+      where("keywords", "array-contains-any", searchKeywords)
+    ),
+    true
+  );
 }

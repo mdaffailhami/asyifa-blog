@@ -40,6 +40,7 @@ addArticleForm.addEventListener("submit", async (e) => {
       image: imageInput.value,
       description: descriptionInput.value,
       body: bodyInput.value(),
+      keywords: titleInput.value.toLowerCase().split(" "),
     });
 
     alert("Article successfully created!");

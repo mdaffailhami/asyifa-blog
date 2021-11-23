@@ -18,29 +18,44 @@
 
     <!-- articles -->
     <div class="container">
-      <div class="container mt-3 position-relative">
-        <h1>Articles</h1>
-        <a
-          type="button"
-          class="btn btn-primary position-absolute"
-          href="/admin/add-article/"
-          style="top: 0; right: 0"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-plus-lg"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
-            ></path>
-          </svg>
-          Add Article
-        </a>
+      <div class="container mt-3">
+        <div class="row">
+          <div class="col-md">
+            <h1>Articles</h1>
+          </div>
+          <div class="col-md">
+            <form id="search-form" class="d-flex">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+        <hr />
+        <div class="container">
+          <center>
+            <a type="button" class="btn btn-primary" href="/admin/add-article/">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-plus-lg"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+                ></path>
+              </svg>
+              Add Article
+            </a>
+          </center>
+        </div>
         <hr />
         <div
           id="articles-container"
