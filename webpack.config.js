@@ -2,8 +2,8 @@ const { resolve } = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const config = {
-  // mode: "production",
-  mode: "development",
+  mode: "production",
+  // mode: "development",
   entry: {
     "script.js": resolve(__dirname, "src/script.js"),
     "article/script.js": resolve(__dirname, "src/article/script.js"),

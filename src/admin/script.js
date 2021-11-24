@@ -104,7 +104,6 @@ onAuthStateChanged(auth, (user) => {
       if (clearArticles) {
         articlesContainer.innerHTML = "";
         articlesContainer.insertAdjacentElement("beforeend", articlesContainerLoader);
-        return;
       }
 
       if (articles.empty) {
